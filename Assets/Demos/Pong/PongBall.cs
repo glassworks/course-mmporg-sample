@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum PongBallState {
   Playing = 0,
@@ -17,7 +19,15 @@ public class PongBall : MonoBehaviour
       get {
         return _State;
       }
-    } 
+    }
+
+    private void Awake()
+    {
+      if (!Global.IsServer)
+      {
+        enabled = false;
+      }
+    }
 
     void Start() {
       Direction = new Vector3(
